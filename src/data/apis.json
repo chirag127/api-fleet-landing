@@ -1,0 +1,67 @@
+[
+  {
+    "slug": "rto",
+    "name": "Indian RTO Codes",
+    "description": "Every Indian RTO vehicle registration code (MH-12, DL-1, KA-01, ...). 1,299 codes across 35 states and union territories.",
+    "subdomain": "rto.oriz.in",
+    "repo": "oriz-org/rto-api",
+    "sampleEndpoint": "/codes/MH-12.json",
+    "sampleResponse": "{ \"code\": \"MH-12\", \"state\": \"Maharashtra\", \"office\": \"Pune\", \"district\": \"Pune\" }",
+    "stats": "1,299 codes · 35 states · CC BY-SA",
+    "themeColor": "amber",
+    "tags": ["india", "transport", "reference"],
+    "license": "CC BY-SA 4.0 (data) / MIT (code)"
+  },
+  {
+    "slug": "constants",
+    "name": "Physics Constants",
+    "description": "All 355 CODATA 2022 fundamental physical constants with values, uncertainties, and units.",
+    "subdomain": "constants.oriz.in",
+    "repo": "oriz-org/constants-api",
+    "sampleEndpoint": "/constants/speed-of-light-in-vacuum.json",
+    "sampleResponse": "{ \"slug\": \"speed-of-light-in-vacuum\", \"value\": 299792458, \"unit\": \"m/s\", \"exact\": true }",
+    "stats": "355 constants · CODATA 2022 · NIST",
+    "themeColor": "indigo",
+    "tags": ["physics", "science", "reference"],
+    "license": "Public domain (NIST CODATA) / MIT (code)"
+  },
+  {
+    "slug": "ragas",
+    "name": "Indian Classical Ragas",
+    "description": "Hindustani + Carnatic ragas with arohana, avarohana, thaat/melakarta, time, and rasa.",
+    "subdomain": "ragas.oriz.in",
+    "repo": "oriz-org/ragas-api",
+    "sampleEndpoint": "/ragas/yaman.json",
+    "sampleResponse": "{ \"slug\": \"yaman\", \"system\": \"hindustani\", \"thaat\": \"Kalyan\", \"arohana\": \"S R G M D N S'\" }",
+    "stats": "100 ragas · 50 Hindustani · 50 Carnatic",
+    "themeColor": "rose",
+    "tags": ["india", "music", "culture"],
+    "license": "CC BY-SA 4.0 (data) / MIT (code)"
+  },
+  {
+    "slug": "dynasties",
+    "name": "Indian Dynasties",
+    "description": "Indian historical dynasties from Maurya to British Raj. Rulers, dates, capitals, regions, religion.",
+    "subdomain": "dynasties.oriz.in",
+    "repo": "oriz-org/dynasties-api",
+    "sampleEndpoint": "/dynasties/mauryan.json",
+    "sampleResponse": "{ \"slug\": \"mauryan\", \"period\": {\"start\": -322, \"end\": -185}, \"rulers\": [...] }",
+    "stats": "39 dynasties · 261 rulers · 544 BCE - 1949 CE",
+    "themeColor": "emerald",
+    "tags": ["india", "history", "reference"],
+    "license": "CC BY-SA 4.0 (data) / MIT (code)"
+  },
+  {
+    "slug": "countries-plus",
+    "name": "Countries+",
+    "description": "Supplements RestCountries with motto, founding date, former capitals, former names. 203 countries.",
+    "subdomain": "countries-plus.oriz.in",
+    "repo": "oriz-org/countries-plus-api",
+    "sampleEndpoint": "/countries/IN.json",
+    "sampleResponse": "{ \"alpha2\": \"IN\", \"motto\": \"Satyameva Jayate\", \"motto_translation\": \"Truth alone triumphs\" }",
+    "stats": "203 countries · supplements RestCountries",
+    "themeColor": "teal",
+    "tags": ["world", "geography", "reference"],
+    "license": "CC BY-SA 4.0 (data) / MIT (code)"
+  }
+]

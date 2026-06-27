@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+import apis from '../data/apis.json';
+
+const totalApis = apis.length;
+const recordsCombined = '1,996+';
+const monthlyCost = '0';
+
+const description = 'Free static JSON APIs for reference data. No auth. No rate limits. No cost.';
+const title = 'oriz API fleet — free static JSON APIs';
+
+const accentMap: Record<string, { border: string; bg: string; text: string; ring: string }> = {
+  amber:   { border: 'border-amber-500',   bg: 'bg-amber-50 dark:bg-amber-950/40',     text: 'text-amber-700 dark:text-amber-300',     ring: 'ring-amber-500/30' },
+  indigo:  { border: 'border-indigo-500',  bg: 'bg-indigo-50 dark:bg-indigo-950/40',   text: 'text-indigo-700 dark:text-indigo-300',   ring: 'ring-indigo-500/30' },
+  rose:    { border: 'border-rose-500',    bg: 'bg-rose-50 dark:bg-rose-950/40',       text: 'text-rose-700 dark:text-rose-300',       ring: 'ring-rose-500/30' },
+  emerald: { border: 'border-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-950/40', text: 'text-emerald-700 dark:text-emerald-300', ring: 'ring-emerald-500/30' },
+  teal:    { border: 'border-teal-500',    bg: 'bg-teal-50 dark:bg-teal-950/40',       text: 'text-teal-700 dark:text-teal-300',       ring: 'ring-teal-500/30' },
+};
+---
+<Base title={title} description={description}>
+  <header class="border-b border-zinc-200 dark:border-zinc-800">
+    <div class="max-w-5xl mx-auto px-6 py-16 sm:py-20">
+      <p class="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono">api.oriz.in</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">oriz API fleet</h1>
+      <p class="mt-4 text-lg sm:text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl">
+        Free static JSON APIs for reference data.<br class="hidden sm:inline" />
+        No auth. No rate limits. No cost.
+      </p>
+      <dl class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+        <div>
+          <dt class="text-zinc-500 dark:text-zinc-400">APIs</dt>
+          <dd class="font-mono text-2xl font-semibold">{totalApis}</dd>
+        </div>
+        <div>
+          <dt class="text-zinc-500 dark:text-zinc-400">Records combined</dt>
+          <dd class="font-mono text-2xl font-semibold">{recordsCombined}</dd>
+        </div>
+        <div>
+          <dt class="text-zinc-500 dark:text-zinc-400">Monthly cost</dt>
+          <dd class="font-mono text-2xl font-semibold">{monthlyCost}<span class="text-base font-normal text-zinc-500">/mo</span></dd>
+        </div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono">Why we built these</h2>
+      <div class="mt-6 grid gap-6 sm:grid-cols-3">
+        <div>
+          <h3 class="font-semibold text-base">Static = free at any scale</h3>
+          <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Prebuilt JSON on the edge. Cloudflare Pages serves the long tail without a server bill.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-base">Public-domain / CC data</h3>
+          <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Sources are NIST, government registers, scholarly references. License noted on every payload.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-base">Owns its data</h3>
+          <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Each API is a git repo with the dataset committed. Forkable. Won't disappear when a startup dies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-200 dark:border-zinc-800">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono">The fleet</h2>
+      <ul class="mt-6 grid gap-6 sm:grid-cols-2">
+        {apis.map((api) => {
+          const accent = accentMap[api.themeColor] ?? accentMap.indigo;
+          return (
+            <li class={`rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 transition hover:shadow-md hover:${accent.border}`}>
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-xl font-semibold tracking-tight">{api.name}</h3>
+                  <p class={`mt-1 text-xs font-mono ${accent.text}`}>{api.subdomain}</p>
+                </div>
+                <span class={`inline-flex h-3 w-3 rounded-full ${accent.bg} ring-2 ${accent.ring} mt-2 shrink-0`} aria-hidden="true"></span>
+              </div>
+              <p class="mt-3 text-sm text-zinc-700 dark:text-zinc-300">{api.description}</p>
+              <p class="mt-3 text-xs text-zinc-500 dark:text-zinc-400 font-mono">{api.stats}</p>
+              <pre class="mt-4 overflow-x-auto rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 text-xs leading-relaxed"><code><span class="text-zinc-500">GET https://{api.subdomain}{api.sampleEndpoint}{'\n'}</span><span class="text-zinc-700 dark:text-zinc-300">{api.sampleResponse}</span></code></pre>
+              <div class="mt-4 flex flex-wrap items-center gap-3 text-sm">
+                <a href={`https://${api.subdomain}/`} class={`inline-flex items-center gap-1 font-medium ${accent.text} hover:underline`}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v7H3V3h7"/></svg>
+                  View docs
+                </a>
+                <a href={`https://github.com/${api.repo}`} class="inline-flex items-center gap-1 font-medium text-zinc-700 dark:text-zinc-300 hover:underline">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8.4 22.9c.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.5-.3-5.2-1.3-5.2-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2.9-.3 1.9-.4 2.9-.4s2 .1 2.9.4c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.2 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+                  GitHub
+                </a>
+                <a href={`https://${api.subdomain}/explorer`} class="inline-flex items-center gap-1 font-medium text-zinc-700 dark:text-zinc-300 hover:underline">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  Explorer
+                </a>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono">How to use</h2>
+      <p class="mt-3 text-zinc-700 dark:text-zinc-300 max-w-2xl">Every endpoint is a static JSON file. Fetch it from anywhere — browser, Node, curl, a spreadsheet.</p>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono mb-2">Browser / Node</p>
+          <pre class="overflow-x-auto rounded-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-4 text-sm"><code>{`fetch('https://rto.oriz.in/codes/MH-12.json')
+  .then(r => r.json())
+  .then(console.log);`}</code></pre>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono mb-2">curl</p>
+          <pre class="overflow-x-auto rounded-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-4 text-sm"><code>{`curl https://rto.oriz.in/codes/MH-12.json`}</code></pre>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-zinc-600 dark:text-zinc-400">CORS is open on every API (<code class="font-mono text-xs">Access-Control-Allow-Origin: *</code>). Responses are cached at the edge.</p>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-200 dark:border-zinc-800">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono">Mirrors</h2>
+      <p class="mt-3 text-zinc-700 dark:text-zinc-300 max-w-2xl">If the primary subdomain is unreachable, every dataset is also published on jsDelivr from the source repo.</p>
+      <pre class="mt-4 overflow-x-auto rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-4 text-sm"><code>{`https://cdn.jsdelivr.net/gh/oriz-org/<api>-api@main/public/<endpoint>.json
+# example:
+https://cdn.jsdelivr.net/gh/oriz-org/rto-api@main/public/codes/MH-12.json`}</code></pre>
+    </div>
+  </section>
+
+  <section class="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <h2 class="text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-mono">Contributing</h2>
+      <p class="mt-3 text-zinc-700 dark:text-zinc-300 max-w-2xl">Found a wrong code, a missing raga, a misattributed dynasty? Open an issue on the relevant repo — datasets live in version control and corrections ship in the next deploy.</p>
+      <ul class="mt-5 grid gap-2 sm:grid-cols-2 text-sm">
+        {apis.map((api) => (
+          <li>
+            <a href={`https://github.com/${api.repo}/issues`} class="font-mono text-zinc-700 dark:text-zinc-300 hover:underline">
+              {api.repo}/issues
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <footer class="bg-white dark:bg-zinc-950">
+    <div class="max-w-5xl mx-auto px-6 py-10 text-sm text-zinc-600 dark:text-zinc-400">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <a href="https://oriz.in/" class="hover:underline text-zinc-800 dark:text-zinc-200 font-medium">oriz.in</a>
+        <a href="https://github.com/oriz-org" class="hover:underline">github.com/oriz-org</a>
+        <a href="https://api.oriz.in/" class="hover:underline">api.oriz.in</a>
+      </div>
+      <p class="mt-4 text-xs leading-relaxed max-w-3xl">
+        Landing page code: MIT. Dataset licenses vary per API:
+        {' '}
+        {apis.map((api, i) => (
+          <span>
+            <span class="font-mono">{api.slug}</span> ({api.license}){i < apis.length - 1 ? '; ' : '.'}
+          </span>
+        ))}
+      </p>
+      <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-500">No tracking beyond aggregate Cloudflare Web Analytics. No cookies.</p>
+    </div>
+  </footer>
+</Base>
