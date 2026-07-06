@@ -16,7 +16,7 @@ Edit `src/data/apis.json` — one entry per API. Each entry needs:
   "name": "Human-readable name",
   "description": "One-sentence pitch.",
   "subdomain": "your-api.oriz.in",
-  "repo": "oriz-org/your-api",
+  "repo": "chirag127/your-api",
   "sampleEndpoint": "/resources/example.json",
   "sampleResponse": "{ ... }",
   "stats": "N records · source · license",

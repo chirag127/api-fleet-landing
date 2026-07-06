@@ -16,6 +16,6 @@
     "astro": "^7.0.3",
     "@tailwindcss/vite": "^4.3.1",
     "tailwindcss": "^4.3.1",
-    "@oriz/web-script-injectors": "github:oriz-org/web-script-injectors"
+    "@oriz/web-script-injectors": "github:chirag127/web-script-injectors"
   }
 }
