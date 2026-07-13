@@ -5,6 +5,10 @@ dev-dist/
 # generated types
 .astro/
 
+# Playwright
+playwright-report/
+test-results/
+
 # dependencies
 node_modules/
 
